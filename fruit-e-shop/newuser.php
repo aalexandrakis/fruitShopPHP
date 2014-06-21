@@ -50,7 +50,7 @@
   //        ($_POST['password'] != $_POST['confpass'])) {
   //        $error_message = "Η επιβεβαίωση κωδικού δεν είναι ίδια με τον κωδικό";}
 
-  if(!filter_var( 'bob@example.com', FILTER_VALIDATE_EMAIL )){
+  if($email != "" && !filter_var( $email, FILTER_VALIDATE_EMAIL )){
         $error_message = "Λάθος Email";
   }
   if ((isset($_POST['name'])) and ($error_message == "")) {
@@ -102,9 +102,9 @@
   
 
   $homepage->content =            
-  "
+  " 
      <form action=\"newuser.php\" method=\"post\" name=\"NewUser\"> 
-     
+     <div class=\"row-xs-12\" style='clear:both;'>
      <Table>
        <tr>
          <td> Ονοματεπώνυμο </td>
@@ -135,8 +135,14 @@
          <td> <input type=\"password\" name=\"confpass\" value='".$confpass."' size=\"20\" maxlength\"20\"></td>
        </tr>
        </table>
-     <input type=\"button\" value=\"Εγγραφή\" onClick=\"result=CheckNewUserData()\"> <br>
-     <font color=\"red\">".$error_message."</font>";
+       <div class=\"row\">
+     	<input type=\"button\" class=\"btn btn-primary\"  value=\"Εγγραφή\" onClick=\"result=CheckNewUserData()\"> <br>
+       </div>";
+  	 if ($error_message != ""){
+        $homepage->content .= "<div class=\"alert alert-danger\">".$error_message."</div>";
+  	 }   
+     $homepage->content .= "</div>";
+  
     }
    
    

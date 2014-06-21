@@ -62,25 +62,41 @@ Class Page
      echo "<SCRIPT language=\"JavaScript\" src=\"".$this->SetJsFile."\"></SCRIPT>\n";   
   }
   echo "<SCRIPT language=\"JavaScript\" src=\"GlobalLogin.js\"></SCRIPT>\n";   
+  echo " <!-- Bootstrap core CSS -->
+    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Bootstrap theme -->
+    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap-theme.min.css\" rel=\"stylesheet\">
+
+    <!-- Custom styles for this template -->
+    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap-theme.css\" rel=\"stylesheet\">";
   $this->DisplayTitle();
   $this->DisplayStyles();
   //echo "</head>\n";
   if ($this->SetBodyOnKeyPress=="") {
-     echo "</head>\n<body bgcolor='#CCFFCC'>\n";
+     echo "</head>\n<body role = \"document\">\n";
   }  else {
-     echo "</head>\n<body bgcolor='#CCFFCC' onKeyPress=\"".$this->SetBodyOnKeyPress."\">\n";
+     echo "</head>\n<body role = \"document\" onKeyPress=\"".$this->SetBodyOnKeyPress."\">\n";
+     echo "<div class=\"container theme-showcase\" role=\"main\">";
   }
-  $this->DisplayHeader();
+  //$this->DisplayHeader();
+  $this->DisplayMenu($this->buttons);
+  $this->DisplayLoginSection();
   $this->DisplaySummary();
   /*$this->DisplayDisconectButton();
   $this->DisplayUpdateProfileButton();*/
   if ($this->DisplayRandomItems=="True"){
 	$this->SelectRandomItems(); 
   }
-  $this->DisplayMenu($this->buttons);
+  
   echo $this->content;
   $this->DisplayFooter();
   echo "</body>\n</html>\n";
+  echo "<!-- Bootstrap core JavaScript\n
+  ================================================== -->\n
+  <!-- Placed at the end of the document so the pages load faster -->\n
+  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"></script>
+  <script src=\"../bootstrap-3.1.1-dist/js/bootstrap.min.js\"></script>";
+  
   //echo "</html>\n";
  }
  
@@ -199,7 +215,6 @@ dt {
  {
 ?>
   <h1> Fruit Shop Alexandrakis </h1>
-  <?php $this->DisplayLoginSection(); ?>
   <h2> Μπακάλικο </h2>
   <a href="downloadapk.php">  Click here to download android application Fruit-e-shop  </a>
   <br>
@@ -230,35 +245,25 @@ dt {
  }
  Public function DisplayLoginSection(){
        $this->Set_Path();
-       $btnforgotimage=$this->path."/buttons/forgotpassword.GIF";
-       $btnconnectimage=$this->path."/buttons/connect.GIF";
-       $btndisconnectimage=$this->path."/buttons/disconnect.GIF";
-
        if (!isset($_SESSION['valid_user']) && !isset($_SESSION['admin'])){
+       	if ($this->error_login_message!=""){
+       		echo     "<div class=\"alert alert-danger\">".$this->error_login_message."</div>\n";
+       	}
 	       echo "<form name='login'  method='post'>\n";
-	       echo     "<div style='float:right'>\n";
-	       echo     "<table>\n";
-	       echo        "<tr>\n";
-	       if ($this->error_login_message!=""){
-		       echo     "<td><font size='2' color='red'>".$this->error_login_message."</font></td>\n";     
-	       }
-	       echo          "<td class='headers'>Email</td>\n";
-	       echo	     "<td> <input type=\"text\" name=\"loginemail\" size=\"50\" maxlength=\"50\" /> </td>\n";
-	       echo	     "<td class='headers'> Κωδικός </td>\n";
-	       echo	     "<td> <input type=\"password\" name=\"loginpassword\" size=\"20\" maxlength=\"20\" /> </td>\n";
-	       echo	     "<td><input type=\"image\" name=\"loginbtn\" src='".$btnconnectimage."' Value=\"Εισοδος\" onClick=\"GlobalCheckLoginData()\"/></td>\n";
-	       echo	     "<td><input type=\"image\" name=\"forgotpassword\" src='".$btnforgotimage."' Value=\"Ξέχασα τον κωδικό μου\" onClick=\"GlobalForgotPasswordScript()\"/></td>\n";
-	       echo        "</tr>\n";
-	       echo     "</table>\n"; 
-	           
-
+	       echo     "<div class=\"row\" >\n";
+	       echo       "<span>Email</span>\n";
+	       echo	     "<input type=\"text\" name=\"loginemail\" size=\"50\" maxlength=\"50\" />\n";
+	       echo	     "<span> Κωδικός </span>\n";
+	       echo	     "<input type=\"password\" name=\"loginpassword\" size=\"20\" maxlength=\"20\" />\n";
+	       echo	     "<input type=\"button\" class=\"btn btn-sm btn-primary\" name=\"loginbtn\" Value=\"Εισοδος\" onClick=\"GlobalCheckLoginData()\"/>\n";
+	       echo	     "<input type=\"button\" class=\"btn btn-sm btn-primary\" name=\"forgotpassword\"  Value=\"Ξέχασα τον κωδικό μου\" onClick=\"GlobalForgotPasswordScript()\"/>\n";
 	       echo     "</div>\n";
 	       echo "</form>\n";
     } else {
                echo "<form name='logout'  method='post'>\n";
-	       echo   "<div style='float:right'>\n";
+	       echo   "<div class=\"row\">\n";
 	       echo 	"<input type=\"hidden\" name=\"logouthidden\"/>\n";
-	       echo     "<input type=\"image\" name=\"logoutbtn\" src='".$btndisconnectimage."' Value=\"Αποσύνδεση\" onClick=\"LogOutScript()\"/>\n";
+	       echo     "<input type=\"button\" class=\"btn btn-sm btn-danger\" name=\"logoutbtn\" Value=\"Αποσύνδεση\" onClick=\"LogOutScript()\"/>\n";
 	       echo   "</div>\n";
 	       echo "</form>\n";
     }
@@ -268,11 +273,7 @@ dt {
  }
 
  Public function LogInOutScript(){
-    // foreach($_POST as $key=>$value){
-    //   echo $key."=>".$value;
-    // }
-     //if(isset($_POST['loginbtn'])){
-          if ((isset($_POST['loginemail'])) && (isset($_POST['loginpassword']))
+      if ((isset($_POST['loginemail'])) && (isset($_POST['loginpassword']))
 		&& $_POST['loginemail']!='' && $_POST['loginpassword']!='') {
 	    $db = new mysqli($this->hostname, $this->user_name, $this->user_password, $this->dbname);
 	      if (mysqli_connect_errno()) {
@@ -294,11 +295,11 @@ dt {
                   }
               }
           }
-   //}
      if (isset($_POST['logouthidden'])){
         unset($_SESSION['valid_user']);
         unset($_SESSION['admin']);
-	header('Location: http://www.aalexandrakis.freevar.com/fruit-e-shop');
+// 	    header('Location: http://www.aalexandrakis.freevar.com/fruit-e-shop');
+        header('Location: index.php');
      }
  } 
 
@@ -399,17 +400,34 @@ dt {
                             "Αλλαγή στοιχείων" => "updateuser.php");
 //                            "Αποσύνδεση" => "logout.php");
    } 
-  echo "<table border= \"1px\"  width=\"100%\" height=\"5%\" >\n";
-  echo "<tr>\n";
+//   echo "<table border= \"1px\"  width=\"100%\" height=\"5%\" >\n";
+//   echo "<tr>\n";
+  echo " <div class=\"navbar navbar-inverse\">\n
+  		 <div class=\"container\">\n
+          <div class=\"navbar-header\">\n
+            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">
+              <span class=\"sr-only\">Toggle navigation</span>
+              <span class=\"icon-bar\"></span>
+              <span class=\"icon-bar\"></span>
+              <span class=\"icon-bar\"></span>
+            </button>
+            <a class=\"navbar-brand\" href=\"#\">"."Fruit Shop Alexandrakis"."</a>\n
+          </div>\n
+  		 <div class=\"navbar-collapse collapse\">
+         <ul class=\"nav navbar-nav\">";
+  
   $width = 100/count($buttons);
   while (list($name, $url) = each($buttons))
   {
     $this ->DisplayButton($width, $name, $url,
     !$this->IsURLCurrentPage($url));
   }
-  echo "</tr>\n";
-  echo "</table>\n";
- 
+//   echo "</tr>\n";
+//   echo "</table>\n";
+  echo "</ul> \n
+  </div><!--/.nav-collapse -->
+  </div>\n</div>";
+  
   
  
  }
@@ -429,12 +447,14 @@ dt {
  public function DisplayButton($width,$name,$url,$active = false)
  {
   if ($active) {
-    echo "<td width = \"".$width."%\"  bgcolor=\"green\">
-    <a class=\"menu\" href=\"".$url."\">".$name."</a>".
-    "</td>\n";
+  	echo "<li class=\"active\"><a href=".$url.">".$name."</a></li>";
+//     echo "<td width = \"".$width."%\"  bgcolor=\"green\">
+//     <a class=\"menu\" href=\"".$url."\">".$name."</a>".
+//     "</td>\n";
    } else {
-    echo "<td width=\"".$width."%\"  bgcolor=\"white\" fgcolor=\"green\" 
-    >".$name." </td>\n";
+//     echo "<td width=\"".$width."%\"  bgcolor=\"white\" fgcolor=\"green\" 
+//     >".$name." </td>\n";
+   	echo "<li><a href=".$url.">".$name."</a></li>";
    }
      
  }
@@ -442,7 +462,7 @@ dt {
  public function DisplayFooter()
  {
 ?>
-     <div class='Footer'>
+     <div class='Footer' style="clear:both">
         Web site created by Alexandrakis Alexandros 
      </div> 
      <br>

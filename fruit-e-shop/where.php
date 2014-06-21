@@ -6,7 +6,7 @@
   $homepage->content = 
          "
           <br>\n
-          <div class=\"contents\" width=\"100%\" >
+          <div class=\"well\" >
                                                                           
       			 Βρισκομαστε στη Νεα Ελβετια του Βυρωνα στην Οδο Βουτζα 12-20.
 		      </div>

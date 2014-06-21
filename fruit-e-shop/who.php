@@ -11,7 +11,7 @@
   $homepage->content =
     " 
         <br>\n
-          <div class=\"contents\" width=\"100%\" >\n
+          <div class=\"well\" >\n
              <dl>\n
                <dt> Αλεξανδράκης Αλέξανδρος </dt>\n
                   <dd> Υπεύθυνος προμηθειών </dd>\n
