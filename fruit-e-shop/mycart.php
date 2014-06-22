@@ -28,20 +28,28 @@
      $homepage->content = 
       "
        <form name=\"UploadCart\" method=\"POST\">
-       <br>\n
-       <h3>Το καλάθι μου </h3>
-       <br>\n                 
-       <table border=1px bordercolor=\"black\">
-           <tr>
-              <td class=\"headers\"> Κωδικός  </td>
-              <td class=\"headers\"> Ονομασία  </td>
-              <td class=\"headers\"> Μον.Μετρ.  </td>
-              <td class=\"headers\"> Τιμή  </td>
-              <td class=\"headers\"> Ποσότητα  </td>
-              <td class=\"headers\"> Αξία  </td>
-              <td>  <input type=\"image\" name=\"delete\" src=\"".$homepage->path."/buttons/deletefromcart.GIF\" onClick=\"return DeleteScript()\"></td>
-           <tr>   
-        "; 
+       <div class=\"container\">
+       <div class=\"bs-docs-section\">
+        <div class=\"row\">
+          <div class=\"col-lg-12\">
+            <div class=\"page-header\">
+              <h1 id=\"tables\">Το καλάθι μου</h1>
+            </div>
+
+            <div class=\"bs-component\">
+              <table class=\"table table-striped table-hover\">
+                <thead>
+                  <tr>
+                    <th>Κωδικός</th>
+                    <th>Ονομασία</th>
+                    <th>Μον.Μέτρησης</th>
+                    <th>Ποσότητα</th>
+                    <th>Τιμή Μονάδος</th>
+                    <th>Αξία</th>
+                    <th>Διαγραφή</th>
+                  </tr>
+                </thead>
+                <tbody>"; 
    
     /*if (!$result) {
     die("error") ;} */
@@ -66,52 +74,48 @@
               </tr>\n";  
               ++$Counter;       }
    
-       $homepage->content =  $homepage->content. 
- 	     "</table>";
-        if (isset($_SESSION['valid_user'])) {
-               $homepage->content =  $homepage->content. 
-               "<input type=\"image\" name=\"createorder\" src=\"".$homepage->path."/buttons/paybutton.GIF\" 
-                              onClick=\"this.form.action='confirmorder.php';
-                              this.form.submit();\"> \n
-				<input type='hidden' name='cmd' value='_cart'/>  
-                                <input type='hidden' name='upload' value='1'/>
-  			 	<input type='hidden' name='business' value='".$homepage->bussiness_email."'/>
-				<input type='hidden' name='currency_code' value='EUR'/>
-				<input type='hidden' name='charset' value='UTF-8' />
-			 	<input type='hidden' name='country' value='GR'>
-			 	<input type='hidden' name='custom' value='".session_id()."'>
-				<input type='hidden' name='notify_url' value='".$homepage->notify_url."' />
-				<input type='hidden' name='rm' value='2' />
-				<input type='hidden' name='return' value='http://aalexandrakis.freevar.com/fruit-e-shop/orders.php' />
-   			        <input type='image'  src='https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif' border='0' 
-				  		     onClick=\"return UploadCartScript()\" 	   
-						     name='submit' alt='PayPal - The safer, easier way to pay online!'/>  
-   	                        <img alt='' border='0' src='https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif' width='1' height='1'/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <br>\n
-                <a href=\"index.php\">Συνέχισε τις αγορές σου</a>\n";
-        } else {
-               $homepage->content =  $homepage->content.
-               "You must login to finish your order\n
-                <br>          
-                <a href=\"index.php\">Συνέχισε τις αγορές σου</a>";
-        }
-      
+       $homepage->content =  $homepage->content.
+       	 "<tr class=\"info\">
+               <td></td>
+               <td>Σύνολο</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td>".$_SESSION['summary']."</td>
+               <td></td>\n
+         </tr>\n 
+ 	     </tbody></table>
+         <input type=\"button\" value=\"Διαγρφή\" class=\"btn btn-danger\" onClick=\"return DeleteScript()\"/>";
+       if (isset($_SESSION['valid_user'])) {
+       	$homepage->content =  $homepage->content.
+       	"<a href=\"index.php\"><input type=\"button\" class=\"btn btn-primary\" value=\"Συνέχισε τις αγορές σου\"/></a>\n
+       	<input type=\"button\" name=\"createorder\" value=\"Πληρωμή με αντικαταβολή\" class=\"btn btn-success\" onClick=\"this.form.action='confirmorder.php';
+       	this.form.submit();\"> \n
+       	<input type='hidden' name='cmd' value='_cart'/>
+       	<input type='hidden' name='upload' value='1'/>
+       	<input type='hidden' name='business' value='".$homepage->bussiness_email."'/>
+       	<input type='hidden' name='currency_code' value='EUR'/>
+       	<input type='hidden' name='charset' value='UTF-8' />
+       	<input type='hidden' name='country' value='GR'>
+       	<input type='hidden' name='custom' value='".session_id()."'>
+       	<input type='hidden' name='notify_url' value='".$homepage->notify_url."' />
+       	<input type='hidden' name='rm' value='2' />
+       	<input type='hidden' name='return' value='http://aalexandrakis.freevar.com/fruit-e-shop/orders.php' />
+       	<input type='image'  src='https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif' border='0'
+       	onClick=\"return UploadCartScript()\"
+       	name='submit' alt='PayPal - The safer, easier way to pay online!'/>
+       	<img alt='' border='0' src='https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif' width='1' height='1'/>
+       
+       	<br>\n";
+       	} else {
+       	$homepage->content =  $homepage->content.
+       	"You must login to finish your order\n
+       	<br>
+       	<a href=\"index.php\">Συνέχισε τις αγορές σου</a>";
+       }
+        
+         $homepage->content .= "</div></div></div></div></div>";
+              
   } else {
      $homepage->content = "Το καλάθι σας είναι άδειο." ;
   }    

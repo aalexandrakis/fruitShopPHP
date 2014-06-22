@@ -74,7 +74,7 @@
 		       <tr>\n
                          <td>\n
 		             <input type=\"hidden\" name=\"itemid\" value=\"".$_GET['itemid']."\"/>
-		             <input type=\"image\" name=\"btnAddToCart\" src='".$btnAddToCartImage."' value=\"Add to cart\" onClick=\"return AddToCart()\"/>\n
+		             <input type=\"button\" name=\"btnAddToCart\" class=\"btn btn-primary\" value=\"Add to cart\" onClick=\"return AddToCart()\"/>\n
                          </td>";
                          if (isset($_SESSION['valid_user'])){
                             $homepage->content .=       

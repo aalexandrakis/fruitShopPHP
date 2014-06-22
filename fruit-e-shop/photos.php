@@ -32,13 +32,24 @@
      
 
     <br>\n
-    <div class=\"contents\" width=\"100%\" >\n 
-    <a href=\"#\" id=\"previous\" style=\"display:none\" onclick=\"GetPreviousImage()\">\n
-      <img name=\"previous\" src=\"".$homepage->path."/buttons/previousarrow.png\" alt=\"Previous Arrow\" width=\"60\" height=\"60\"/></a>\n
-       <img id=\"mainphoto\" src=\"".$currentimage."\" alt=\"Main Photo\" width=\"80%\" height=\"65%\"/>\n
-    <a href=\"#\" id=\"next\" onclick=\"GetNextImage()\">\n
-       <img name=\"next\" src=\"".$homepage->path."/buttons/nextarrow.png\" alt=\"Next Arrow\" width=\"60\" height=\"60\"/></a>\n
+    <div class=\"container\" >\n
+    <div class=\"bs-docs-section\" >\n
+    <div class=\"row\" >\n
+    <div class=\"col-lg-12\" >\n 
+    <div class=\"bs-component\" >\n
+    <ul class=\"pager\">
+    <li id=\"previous\" class=\"previous\" style=\"display:none\">
+    	<a href=\"#\"  onclick=\"GetPreviousImage()\"><<</a>\n
+    </li>
+    <li>   <img id=\"mainphoto\" src=\"".$currentimage."\" alt=\"Main Photo\" width=\"80%\" height=\"65%\"/>\n</li>
+    <li id=\"next\" class=\"next\">
+    	<a href=\"#\"  onclick=\"GetNextImage()\">>></a>\n
+    </li>	
     <br>\n
+    </div>
+    </div>
+    </div>
+   </div>
    </div>"; 
       
 	$homepage->Display();

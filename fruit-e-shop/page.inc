@@ -63,12 +63,9 @@ Class Page
   }
   echo "<SCRIPT language=\"JavaScript\" src=\"GlobalLogin.js\"></SCRIPT>\n";   
   echo " <!-- Bootstrap core CSS -->
-    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap.min.css\" rel=\"stylesheet\">
-    <!-- Bootstrap theme -->
-    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap-theme.min.css\" rel=\"stylesheet\">
-
-    <!-- Custom styles for this template -->
-    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap-theme.css\" rel=\"stylesheet\">";
+    <link href=\"../bootstrap-3.1.1-dist/css/bootstrap.css\" rel=\"stylesheet\" media=\"screen\">
+    <link href=\"../bootstrap-3.1.1-dist/css/bootswatch.min.css\" rel=\"stylesheet\">";
+    
   $this->DisplayTitle();
   $this->DisplayStyles();
   //echo "</head>\n";
@@ -76,12 +73,12 @@ Class Page
      echo "</head>\n<body role = \"document\">\n";
   }  else {
      echo "</head>\n<body role = \"document\" onKeyPress=\"".$this->SetBodyOnKeyPress."\">\n";
-     echo "<div class=\"container theme-showcase\" role=\"main\">";
+     echo "<div class=\"container\" role=\"main\">";
   }
   //$this->DisplayHeader();
   $this->DisplayMenu($this->buttons);
   $this->DisplayLoginSection();
-  $this->DisplaySummary();
+//   $this->DisplaySummary();
   /*$this->DisplayDisconectButton();
   $this->DisplayUpdateProfileButton();*/
   if ($this->DisplayRandomItems=="True"){
@@ -94,9 +91,9 @@ Class Page
   echo "<!-- Bootstrap core JavaScript\n
   ================================================== -->\n
   <!-- Placed at the end of the document so the pages load faster -->\n
-  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"></script>
-  <script src=\"../bootstrap-3.1.1-dist/js/bootstrap.min.js\"></script>";
-  
+  <script src=\"https://code.jquery.com/jquery-1.10.2.min.js\"></script>
+  <script src=\"../bootstrap-3.1.1-dist/js/bootstrap.min.js\"></script>
+  <script src=\"../bootstrap-3.1.1-dist/js/bootswatch.js\"></script>";
   //echo "</html>\n";
  }
  
@@ -109,12 +106,6 @@ Class Page
  {
 ?>
  <style>
-h1 { 
-	color:white; 
-	text-align:center;
-	background-color:green;
-	
-}
 
 h2 {
 	color:green;
@@ -122,10 +113,6 @@ h2 {
 	float:center;
 	}
 
-div { 
-	text-align:center;
-
-}
 
 .Footer {
  	border:1px solid black;
@@ -251,19 +238,23 @@ dt {
        	}
 	       echo "<form name='login'  method='post'>\n";
 	       echo     "<div class=\"row\" >\n";
+	       echo     "<div class=\"col-lg-12\">";
 	       echo       "<span>Email</span>\n";
 	       echo	     "<input type=\"text\" name=\"loginemail\" size=\"50\" maxlength=\"50\" />\n";
 	       echo	     "<span> Κωδικός </span>\n";
 	       echo	     "<input type=\"password\" name=\"loginpassword\" size=\"20\" maxlength=\"20\" />\n";
-	       echo	     "<input type=\"button\" class=\"btn btn-sm btn-primary\" name=\"loginbtn\" Value=\"Εισοδος\" onClick=\"GlobalCheckLoginData()\"/>\n";
-	       echo	     "<input type=\"button\" class=\"btn btn-sm btn-primary\" name=\"forgotpassword\"  Value=\"Ξέχασα τον κωδικό μου\" onClick=\"GlobalForgotPasswordScript()\"/>\n";
+	       echo	     "<input type=\"button\" class=\"btn btn-primary\" name=\"loginbtn\" Value=\"Εισοδος\" onClick=\"GlobalCheckLoginData()\"/>\n";
+	       echo	     "<input type=\"button\" class=\"btn btn-primary\" name=\"forgotpassword\"  Value=\"Ξέχασα τον κωδικό μου\" onClick=\"GlobalForgotPasswordScript()\"/>\n";
+	       echo     "</div>\n";
 	       echo     "</div>\n";
 	       echo "</form>\n";
     } else {
                echo "<form name='logout'  method='post'>\n";
 	       echo   "<div class=\"row\">\n";
+	       echo     "<div class=\"col-lg-12\">";
 	       echo 	"<input type=\"hidden\" name=\"logouthidden\"/>\n";
-	       echo     "<input type=\"button\" class=\"btn btn-sm btn-danger\" name=\"logoutbtn\" Value=\"Αποσύνδεση\" onClick=\"LogOutScript()\"/>\n";
+	       echo     "<input type=\"button\" class=\"btn btn-danger\" name=\"logoutbtn\" Value=\"Αποσύνδεση\" onClick=\"LogOutScript()\"/>\n";
+	       echo   "</div>\n";
 	       echo   "</div>\n";
 	       echo "</form>\n";
     }
@@ -368,6 +359,11 @@ dt {
 
  Public function DisplayMenu($buttons)
  {
+ 	$cartSize = "";
+ if (isset($_SESSION['cart'])){
+ 	$cartSize = "(".count($_SESSION['cart']).")";
+ }
+ 
  if (isset($_SESSION['admin'])) {
     $buttons = array ("Ποιοι είμαστε" => "who.php",
                       "Που είμαστε" => "where.php",
@@ -381,12 +377,13 @@ dt {
 //                      "Έξοδος" => "logout.php");
   
   } else if (!isset($_SESSION['valid_user'])) {
+  	
    $buttons = array ("Ποιοι είμαστε" => "who.php",
                      "Που είμαστε" => "where.php",
                      "Φωτογραφίες" => "photos.php",
                      "Επικοινωνία" => "contactus.php",
                      "Παραγγελία" => "index.php", 
-                     "Το καλάθι μου" => "mycart.php",
+                     "Το καλάθι μου".$cartSize => "mycart.php",
                      "Νέος χρήστης" => "newuser.php");
 //                     "Είσοδος" => "login.php");
   } else if (isset($_SESSION['valid_user'])){
@@ -396,7 +393,7 @@ dt {
                             "Επικοινωνία" => "contactus.php",
                             "Παραγγελία" => "index.php",
                             "Οι Παραγγελίες μου" => "orders.php",
-                            "Το καλάθι μου" => "mycart.php",
+                            "Το καλάθι μου".$cartSize => "mycart.php",
                             "Αλλαγή στοιχείων" => "updateuser.php");
 //                            "Αποσύνδεση" => "logout.php");
    } 
@@ -462,9 +459,17 @@ dt {
  public function DisplayFooter()
  {
 ?>
-     <div class='Footer' style="clear:both">
-        Web site created by Alexandrakis Alexandros 
-     </div> 
+		<div class="row">
+          <div class="col-lg-12">
+            <div class="bs-component">
+              <div class="well">
+                Web site created by Alexandrakis Alexandros
+              </div>
+            </div>
+          </div>
+          </div>
+          
+    
      <br>
 <?php
   

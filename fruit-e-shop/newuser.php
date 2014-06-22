@@ -100,48 +100,70 @@
         }   
   } else {
   
-
+  	if ($error_message != ""){
+  		$homepage->content .= "<div class=\"alert alert-danger\">".$error_message."</div>";
+  	}
+  	
   $homepage->content =            
-  " 
-     <form action=\"newuser.php\" method=\"post\" name=\"NewUser\"> 
-     <div class=\"row-xs-12\" style='clear:both;'>
-     <Table>
-       <tr>
-         <td> Ονοματεπώνυμο </td>
-         <td> <input type=\"text\" name=\"name\" value='".$name."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Διεύθυνση </td>
-         <td> <input type=\"text\" name=\"address\" value='".$address."' size=\"50\" maxlength\"100\"></td>
-       </tr>
-       <tr>
-         <td> Πόλη/Περιοχή </td>
-         <td> <input type=\"text\" name=\"city\" value='".$city."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Τηλέφωνο </td>
-         <td> <input type=\"text\" name=\"phone\" value='".$phone."' size=\"10\" maxlength\"10\"></td>
-       </tr>
-       <tr>
-         <td> E-mail </td>
-         <td> <input type=\"text\" name=\"email\" value='".$email."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Κωδικός χρήστη </td>
-         <td> <input type=\"password\" name=\"password\" value='".$password."' size=\"20\" maxlength\"20\"></td>
-       </tr>                                             
-       <tr>
-         <td> Επιβεβαίωση κωδικού χρήστη </td>
-         <td> <input type=\"password\" name=\"confpass\" value='".$confpass."' size=\"20\" maxlength\"20\"></td>
-       </tr>
-       </table>
-       <div class=\"row\">
-     	<input type=\"button\" class=\"btn btn-primary\"  value=\"Εγγραφή\" onClick=\"result=CheckNewUserData()\"> <br>
-       </div>";
-  	 if ($error_message != ""){
-        $homepage->content .= "<div class=\"alert alert-danger\">".$error_message."</div>";
-  	 }   
-     $homepage->content .= "</div>";
+  "  	<div class=\"bs-docs-section\">
+  		<div class=\"row\">
+          <div class=\"col-lg-8\">
+            <div class=\"well bs-component\">";
+            
+  $homepage->content .= "<form class=\"form-horizontal\" action=\"newuser.php\" method=\"post\" name=\"NewUser\"> 
+     				<fieldset>
+     				 <div class=\"form-group\">
+                    	<label for=\"name\" class=\"col-lg-2 control-label\">Όνομα</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"name\" placeholder=\"Όνομα\" type=\"text\" value='".$name."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"address\" class=\"col-lg-2 control-label\">Διεύθυνση</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"address\" placeholder=\"Διεύθυνση\" type=\"text\" value='".$address."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"city\" class=\"col-lg-2 control-label\">Πόλη</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"city\" placeholder=\"Πόλη\" type=\"text\" value='".$city."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"phone\" class=\"col-lg-2 control-label\">Τηλέφωνο</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"phone\" placeholder=\"Τηλέφωνο\" type=\"text\" value='".$phone."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"email\" class=\"col-lg-2 control-label\">E-mail</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"email\" placeholder=\"E-mail\" type=\"text\" value='".$email."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"password\" class=\"col-lg-2 control-label\">Κωδικός</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"password\" placeholder=\"Κωδικός\" type=\"password\" value='".$password."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"confpass\" class=\"col-lg-2 control-label\">Επιβεβαίωση κωδικού</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"confpass\" type=\"password\" placeholder=\"Επιβεβαίωση κωδικού\"  value='".$confpass."'>
+                      	</div>	
+                    </div>
+                    <div class=\"form-group\">
+                      <div class=\"col-lg-2 col-lg-offset-2\">
+			     		<input type=\"button\" class=\"btn btn-primary\"  value=\"Εγγραφή\" onClick=\"result=CheckNewUserData()\"> <br>
+			          </div>
+  					</div>
+  					</fieldset>
+                    </form>
+                  	";
+  	    
+     $homepage->content .= "</div></div></div></div>";
   
     }
    

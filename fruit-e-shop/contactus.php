@@ -43,14 +43,18 @@
   "
    <form method=\"POST\" action=\"contactus.php\">
    <br>\n
-    <div class=\"contents\" width=\"100%\" >\n
+     <div class=\"container\" >\n
+    <div class=\"bs-docs-section\" >\n
+    <div class=\"row\" >\n
+    <div class=\"col-lg-12\" >\n 
+    <div class=\"bs-component\" >\n
    	 	<dl>
 				<dt> email </dt>
 					<dd> aalexandrakis@hotmail.com </dd>
   			<dt> Τηλέφωνα </dt>
 					<dd> 210-7643761, 6948-211181 </dd>
 			</dl>
-    </div>
+    
       <span  style=\"margin-left:3px;font-weight: bold\">Στείλτε μας ένα μήνυμα  </span>
       <table>
         <tr>
@@ -69,8 +73,9 @@
       <br> 
       <input type=\"submit\" name=\"sendit\" value=\"Αποστολή Email\">
       <br>
-      <font color=\"red\">".$errormessage."  </font> <br>
-      ".$confirmation."<br>";
+      <div class\"alert alert-dismissable alert-danger\">".$errormessage."</div> <br>
+      </div></div></div></div></div>
+      <div class\"alert alert-dismissable alert-success\">".$confirmation."</div><br>";
       
 	$homepage->Display();
 ?>
