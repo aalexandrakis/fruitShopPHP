@@ -27,19 +27,29 @@
   
     $homepage->content =            
     "<form name=\"ViewCustomers\" > \n
-     <br>\n                 
-    <table border=1px bordercolor=\"black\">
-        <tr>
-           <td class=\"headers\"> Κωδικός </td>\n 
-           <td class=\"headers\"> Όνομα </td>   \n
-           <td class=\"headers\"> Διεύθυνση  </td>  \n
-           <td class=\"headers\"> Πόλη/Περιοχή</td> \n
-           <td class=\"headers\"> Τηλέφωνο </td>      \n
-           <td class=\"headers\"> Email </td>  \n
-           <td class=\"headers\"> Ημ.Εγγραφής </td>  \n
-           <td class=\"headers\"> Μέλος/Διαχειριστής </td>  \n
-        </tr>\n   
-     ";
+    <div class=\"container\">
+       <div class=\"bs-docs-section\">
+        <div class=\"row\">
+          <div class=\"col-lg-12\">
+            <div class=\"page-header\">
+              <h1 id=\"tables\">Μέλη καταστήματος</h1>
+            </div>
+
+            <div class=\"bs-component\">
+              <table class=\"table table-striped table-hover\">
+                <thead>
+                  <tr>
+                    <th>Κωδικός</th>
+                    <th>Όνομα</th>
+                    <th>Διεύθυνση</th>
+                    <th>Πόλη/Περιοχή</th>
+                    <th>Τηλέφωνο</th>
+                    <th>Email</th>
+                    <th>Ημ.Εγγραφής</th>
+                     <th>Τύπος Μέλους</th>
+                  </tr>
+                </thead>
+                <tbody>"; 
      
      $AdminLink = "Διαχειριστής Καταστήματος";
      $MemberLink = "Μέλος Καταστήματος";
@@ -65,7 +75,7 @@
      
      $db->close();
      $homepage->content = $homepage->content.
-     "</table>\n".
+     "</tbody></table></div></div></div></div>\n".
      "<br>\n"; 
    
    

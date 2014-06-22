@@ -115,43 +115,43 @@
      				 <div class=\"form-group\">
                     	<label for=\"name\" class=\"col-lg-2 control-label\">Όνομα</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"name\" placeholder=\"Όνομα\" type=\"text\" value='".$name."'>
+                      		<input class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Όνομα\" type=\"text\" value='".$name."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"address\" class=\"col-lg-2 control-label\">Διεύθυνση</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"address\" placeholder=\"Διεύθυνση\" type=\"text\" value='".$address."'>
+                      		<input class=\"form-control\" id=\"address\" name=\"address\" placeholder=\"Διεύθυνση\" type=\"text\" value='".$address."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"city\" class=\"col-lg-2 control-label\">Πόλη</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"city\" placeholder=\"Πόλη\" type=\"text\" value='".$city."'>
+                      		<input class=\"form-control\" id=\"city\"  name=\"city\" placeholder=\"Πόλη\" type=\"text\" value='".$city."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"phone\" class=\"col-lg-2 control-label\">Τηλέφωνο</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"phone\" placeholder=\"Τηλέφωνο\" type=\"text\" value='".$phone."'>
+                      		<input class=\"form-control\" id=\"phone\" name=\"phone\" placeholder=\"Τηλέφωνο\" type=\"text\" value='".$phone."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"email\" class=\"col-lg-2 control-label\">E-mail</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"email\" placeholder=\"E-mail\" type=\"text\" value='".$email."'>
+                      		<input class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"E-mail\" type=\"text\" value='".$email."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"password\" class=\"col-lg-2 control-label\">Κωδικός</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"password\" placeholder=\"Κωδικός\" type=\"password\" value='".$password."'>
+                      		<input class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Κωδικός\" type=\"password\" value='".$password."'>
                     	</div>
                   	</div>
                   	<div class=\"form-group\">
                     	<label for=\"confpass\" class=\"col-lg-2 control-label\">Επιβεβαίωση κωδικού</label>
                     	<div class=\"col-lg-10\">
-                      		<input class=\"form-control\" id=\"confpass\" type=\"password\" placeholder=\"Επιβεβαίωση κωδικού\"  value='".$confpass."'>
+                      		<input class=\"form-control\" id=\"confpass\" name=\"confpass\" type=\"password\" placeholder=\"Επιβεβαίωση κωδικού\"  value='".$confpass."'>
                       	</div>	
                     </div>
                     <div class=\"form-group\">

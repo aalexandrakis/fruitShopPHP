@@ -48,19 +48,27 @@
    $homepage->content = 
       "
        <form method=\"POST\" >
-       <br>\n
-       <h3>".$header."</h3>
-       <br>\n                 
-       <table border=1px bordercolor=\"black\">
-        <tr>
-           <td class=\"headers\"> Κωδικός  </td>
-           <td class=\"headers\"> Ονομασία  </td>
-           <td class=\"headers\"> Μον.Μετρ.  </td>
-           <td class=\"headers\"> Τιμή  </td>
-           <td class=\"headers\"> Ποσότητα  </td>
-           <td class=\"headers\"> Αξία  </td>
-        <tr>   
-     "; 
+        <div class=\"container\">
+       <div class=\"bs-docs-section\">
+        <div class=\"row\">
+          <div class=\"col-lg-12\">
+            <!--<div class=\"page-header\">
+              <h1 id=\"tables\">Οι παραγγελίες μου</h1>
+            </div>-->
+			<h3>".$header."</h3>
+            <div class=\"bs-component\">
+              <table class=\"table table-striped table-hover\">
+                <thead>
+                  <tr>
+                    <th>Κωδικός</th>
+                    <th>Ονομασία</th>
+                    <th>Μον.Μέτρησης</th>
+                    <th>Τιμή</th>
+                    <th> Ποσότητα  </th>
+				     <th> Αξία  </th> 
+                  </tr>
+                </thead>
+                <tbody>"; 
        $summary=0;
        while($row=$result->fetch_assoc()){
            $homepage->content = $homepage->content.
@@ -74,21 +82,30 @@
            </tr>";
               $summary = $summary + ($row['price'] * $row['quantity']);
        }
+       $homepage->content = $homepage->content.
+       "<tr class=\"info\">
+       <td></td>
+       <td>Σύνολο</td>
+       <td></td>
+       <td></td>
+       <td></td>
+       <td>".$summary."</td>
+       </tr>";
        
        $homepage->content = $homepage->content.
-       "</table>\n".
-       "Συνολική αξία παραγγελίας: ".$summary;
+       "</tbody></table>"; 
+       
        
        $button = "";
        if (isset($_SESSION['admin']) and ($status < 4)){
-          $button = "<input type=\"submit\" name=\"UpdateStatus\" value=\"".
+          $button = "<input type=\"submit\" class=\"btn btn-warning\" name=\"UpdateStatus\" value=\"".
                     $homepage->Order_Status[$status +1 ]."\"/>"; 
                           
                     $homepage->content = $homepage->content."<br> Αλλαγή κατάστασης σε".$button;
        }
        
        
-  
+       $homepage->content .= "</div></div></div></div></div>\n";
    
    
 

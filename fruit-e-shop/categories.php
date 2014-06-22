@@ -30,6 +30,11 @@
   
   <br>\n
   <h3>".$header."</h3>\n 
+  <div class=\"container\">
+  <div class=\"bs-docs-section\">
+  		<div class=\"row\">
+          <div class=\"col-lg-8\">
+            <div class=\"well bs-component\">
   <br>";                 
   
     while ($row = mysqli_fetch_assoc($result)) {
@@ -40,13 +45,12 @@
  $db->close();   
  if (isset($_SESSION['admin'])){
     $homepage->content =  $homepage->content.
-        "<button  name=\"addnew\" onclick=\"this.form.action='category.php';\n
-                                            this.form.submit()\">\n
-              Προσθήκη νέας κατηγορίας\n
-         </button>";                                     
+        "<input type=\"button\" class=\"btn btn-success\"  name=\"addnew\" value=\"Προσθήκη νέας κατηγορίας\" onclick=\"this.form.action='category.php';\n
+                                            this.form.submit()\"/>\n";
+                                                   
  }
   
-      
+    $homepage -> content .= "</div></div></div></div></div>";  
  } 
    
    

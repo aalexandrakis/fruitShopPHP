@@ -75,26 +75,44 @@
     $idtextbox = "";
     $buttonvalue = "Νέα εγγραφή"; 
     if (isset($_GET['categoryid'])){
-        $idtextbox = "<tr>\n
-                        <td> Κωδικός </td>
-                        <td>".$_GET['categoryid']."</td>\n
-                      </tr>\n";
+        $idtextbox = "
+       	<div class=\"form-group\">
+             <label for=\"categoryid\" class=\"col-lg-2 control-label\">Κωδικός</label>
+             <div class=\"col-lg-10\">
+                  <input class=\"form-control\" id=\"categoryid\" name=\"categoryid\" placeholder=\"Κωδικός\" type=\"text\" value='".$_GET['categoryid']."' readonly>
+             </div>
+         </div>";
         $buttonvalue = "Διόρθωση";
     
     }
     $homepage->content =            
     "
-     <form method=\"post\">\n 
-  
+    <div class=\"bs-docs-section\">
+  		<div class=\"row\">
+          <div class=\"col-lg-8\">
+            <div class=\"well bs-component\">
+     <form class=\"form-horizontal\" method=\"post\">\n";
+      if (isset($error_message) && $error_message != ""){
+      	$homepage -> content .=
+          "<div class=\"alert alert-dismissable alert-danger\">".$error_message."</div>\n";
+      }
+     $homepage -> content .=
+     "<fieldset>
      <Table>".
        $idtextbox.
-       "<tr>\n
-         <td> Κατηγορία </td>\n
-         <td> <input type=\"text\" name=\"category\" value='".$category."' size=\"50\" maxlength\"50\"></td>\n
-       </tr>\n
-     </table> \n
-     <input type=\"submit\" name=\"btn\" value=\"".$buttonvalue."\"> <br> \n
-     <font color=\"red\">".$error_message."</font>\n"; 
+     	"<div class=\"form-group\">
+             <label for=\"category\" class=\"col-lg-2 control-label\">Κατηγορία</label>
+             <div class=\"col-lg-10\">
+                  <input class=\"form-control\" id=\"category\" name=\"category\" placeholder=\"Κατηγορία\" type=\"text\" value='".$category."'>
+             </div>
+         </div>
+         <div class=\"form-group\">
+           <div class=\"col-lg-2 col-lg-offset-2\">
+     			<input type=\"submit\" class=\"btn btn-primary\" name=\"btn\" value=\"".$buttonvalue."\"> <br> \n
+     	   </div>
+     	</div>   		
+     </form></div></div></div></div>";
+      
   }
    
    

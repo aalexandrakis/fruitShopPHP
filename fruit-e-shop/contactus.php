@@ -41,37 +41,45 @@
   
   $homepage->content = 
   "
-   <form method=\"POST\" action=\"contactus.php\">
    <br>\n
      <div class=\"container\" >\n
     <div class=\"bs-docs-section\" >\n
     <div class=\"row\" >\n
-    <div class=\"col-lg-12\" >\n 
-    <div class=\"bs-component\" >\n
-   	 	<dl>
+    <div class=\"col-lg-6\" >\n 
+    <div class=\"well bs-component\" >\n
+   	 		<dl>
 				<dt> email </dt>
 					<dd> aalexandrakis@hotmail.com </dd>
   			<dt> Τηλέφωνα </dt>
-					<dd> 210-7643761, 6948-211181 </dd>
+					<dd> 210-7472461, 6948-211181 </dd>
 			</dl>
-    
-      <span  style=\"margin-left:3px;font-weight: bold\">Στείλτε μας ένα μήνυμα  </span>
-      <table>
-        <tr>
-          <td> Your Email </td>
-          <td> <input type=\"text\" name=\"yoursmail\" size=\"50\" value=\"".$yoursmail."\"> </td>
-        </tr>
-        <tr>
-          <td> Mail Subject </td>
-          <td> <input type=\"text\" name=\"subject\" size=\"50\" value=\"".$subject."\"> </td>
-        </tr> 
-        <tr>
-          <td> Mail text</td>
-          <td> <TEXTAREA NAME=\"mail\" ROWS=5 COLS=50>".$mail."</textarea> </td>
-        </tr>
-      </table>   
+   <form method=\"POST\" class=\"form-horizontal\" action=\"contactus.php\">
+	  <fieldset>
+	  	<legend>Στείλτε μας ένα μήνυμα  </legend>
+     	<div class=\"form-group\">
+             <label for=\"yoursmail\" class=\"col-lg-2 control-label\">Το email σας</label>
+           	 <div class=\"col-lg-10\">
+           		<input class=\"form-control\" id=\"yoursmail\" name=\"yoursmail\" placeholder=\"Το email σας\" type=\"text\" value='".$yoursmail."'>
+             </div>
+      	</div>		
+
+      	<div class=\"form-group\">
+             <label for=\"subject\" class=\"col-lg-2 control-label\">Θέμα</label>
+           	 <div class=\"col-lg-10\">
+           		<input class=\"form-control\" id=\"subject\" name=\"subject\" placeholder=\"Θέμα\" type=\"text\" value='".$subject."'>
+             </div>
+      	</div>		
+        
+      	<div class=\"form-group\">
+             <label for=\"subject\" class=\"col-lg-2 control-label\">Κείμενο</label>
+           	 <div class=\"col-lg-10\">
+           		<textarea class=\"form-control\" id=\"mail\" name=\"mail\" placeholder=\"Κείμενο\" rows=\"3\" value='".$mail."'></textarea>
+             </div>
+      	</div>		
+           
+      </form>
       <br> 
-      <input type=\"submit\" name=\"sendit\" value=\"Αποστολή Email\">
+      <input type=\"submit\" class=\"btn btn-primary\" name=\"sendit\" value=\"Αποστολή Email\">
       <br>
       <div class\"alert alert-dismissable alert-danger\">".$errormessage."</div> <br>
       </div></div></div></div></div>

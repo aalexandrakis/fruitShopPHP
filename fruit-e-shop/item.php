@@ -27,8 +27,9 @@
      $photo = $_POST['photo'];}
      else {$photo="";}
   
+  
   if ((isset($_POST['descr'])) && ($_POST['descr'] == "")) {
-       $error_message = "Δεν εχεις συμπληρώσει περιγραφή ";}
+  	   $error_message = "Δεν εχεις συμπληρώσει περιγραφή ";}
   else if ((isset($_POST['mm'])) && ($_POST['mm'] == "")) {
        $error_message = "Δεν εχεις συμπληρώσει μονάδα μέτρησης ";} 
   else if ((isset($_POST['price'])) && ($_POST['price'] == "")) {
@@ -176,65 +177,92 @@
          $db->commit();
          mysqli_autocommit($db, TRUE);
          $db->close();
-         $location = "Location: ".$homepage->path."/items.php?catid="
+         $location = "Location: ".$homepage->path."/index.php?catid="
                    .$_POST['categoryid'];
          header($location);
   }   
     $idtextfield = "";
     if (isset($_GET['itemid'])) {
-    $idtextfield = "<tr>   \n
-                      <td> Κωδικός </td>\n
-                      <td>".$_GET['itemid']."</td>\n
-                    </tr>\n";
+    $idtextfield = "<div class=\"form-group\">
+             			<label for=\"itemid\" class=\"col-lg-2 control-label\">Κωδικός</label>
+             			<div class=\"col-lg-10\">
+                  			<input class=\"form-control\" id=\"itemid\" name=\"itemid\" placeholder=\"Κωδικός\" type=\"text\" value='".$_GET['itemid']."' readonly>
+             		    </div>
+    				</div>";
     }
     $homepage->content =            
-    "
-      <form enctype=\"multipart/form-data\" method=\"POST\" > \n
-      <Table> \n".
-        $idtextfield."
-       <tr>\n
-         <td> Περιγραφή </td>\n
-         <td> <input type=\"text\" name=\"descr\" value='".$descr."' size=\"50\" ></td>\n
-       </tr>\n
-       <tr>\n
-         <td> Τιμή </td>\n
-         <td> <input type=\"text\" name=\"price\" value='".$price."'></td>\n
-       </tr>\n
-       <tr>\n
-         <td> Μονάδα μέτρησης </td>\n
-         <td>".$homepage->BuiltComboMM($mm)."</td>\n
-       </tr>\n
-       <tr>\n
-         <td> Κατηγορία </td>\n
-         <td>".$homepage->BuiltComboCat($categoryid)."</td>\n
-       </tr>\n
-       <tr>\n
-         <td> Display </td>\n
-         <td> <input type=\"checkbox\" name=\"display\" value=".$display." ".$homepage->ischecked($display, 1)."></td>\n
-       </tr>\n
-       <tr>\n
-         <td> Φωτογραφία </td>\n
-         <td>".$homepage->BuiltComboPhotos($photo)."</td>\n
-       </tr>\n
-       <tr>\n
-          <td><label for=\"file\">Ανέβασε νέα φοτωγραφία</label></td>\n 
-          <td><input id=\"file\" type=\"file\" name=\"file\"></td>\n
-       </tr>\n   
-      <br> 
-      </table>";
+    "<div class=\"container\">
+  		<div class=\"bs-docs-section\">
+  		<div class=\"row\">
+          <div class=\"col-lg-8\">
+            <div class=\"well bs-component\">
+      <form class=\"form-horizontal\" enctype=\"multipart/form-data\" method=\"POST\" > \n
+      <fieldset>";
+    if (isset($error_message) && $error_message != ""){
+    	$homepage -> content .=
+    	"<div class=\"bs-component\"><div class=\"alert alert-dismissable alert-danger\">".$error_message."</div></div>\n";
+    }	
+    $homepage -> content .=
+      $idtextfield."
+       <div class=\"form-group\">
+             <label for=\"descr\" class=\"col-lg-2 control-label\">Περιγραφή</label>
+             <div class=\"col-lg-10\">
+                  <input class=\"form-control\" id=\"descr\" name=\"descr\" placeholder=\"Περιγραφή\" type=\"text\" value='".$descr."'>
+             </div>
+       </div>
+       <div class=\"form-group\">
+             <label for=\"price\" class=\"col-lg-2 control-label\">Τιμή</label>
+             <div class=\"col-lg-10\">
+                  <input class=\"form-control\" id=\"price\" name=\"price\" placeholder=\"Τιμή\" type=\"text\" value='".$price."'>
+       		 </div>
+       </div>
+       <div class=\"form-group\">
+             <label for=\"mm\" class=\"col-lg-2 control-label\">Μονάδα Μέτρησης</label>
+             <div class=\"col-lg-10\">
+                 ".$homepage->BuiltComboMM($mm)." 
+       		 </div>
+       </div>
+       <div class=\"form-group\">
+             <label for=\"categoryid\" class=\"col-lg-2 control-label\">Κατηγορία</label>
+             <div class=\"col-lg-10\">
+                 ".$homepage->BuiltComboCat($categoryid)." 
+       		 </div>
+       </div>
+       <div class=\"form-group\">
+             <label for=\"display\" class=\"col-lg-2 control-label\">Εμφάνιση</label>
+             <div class=\"col-lg-10\">
+                 <input class=\"checkbox\" type=\"checkbox\" name=\"display\" value=".$display." ".$homepage->ischecked($display, 1)."> 
+       		 </div>
+       </div>
+       <div class=\"form-group\">
+             <label for=\"photo\" class=\"col-lg-2 control-label\">Φωτογραφία</label>
+             <div class=\"col-lg-10\">
+                 ".$homepage->BuiltComboPhotos($photo)." 
+       		 </div>
+       </div>
+       <div class=\"form-group\">
+          <label for=\"file\">Ανέβασε νέα φοτωγραφία</label>\n
+          <div class=\"col-lg-10\"> 
+          	<input class=\"btn btn-primary\" id=\"file\" type=\"file\" name=\"file\">\n
+          </div>\n	
+       </div>\n";
       
       if (isset($_GET['itemid'])) {
          $homepage->content=$homepage->content.
-           "<input type=\"submit\" name=\"btn\" value=\"Διόρθωση\"> <br>\n";
+           "<div class=\"form-group\">
+           		<div class=\"col-lg-2 col-lg-offset-2\">
+         			<input class=\"btn btn-primary\" type=\"submit\" name=\"btn\" value=\"Διόρθωση\"> <br>\n
+         		<div>
+         	</div>";
       } else {
          $homepage->content=$homepage->content.
-           "<input type=\"submit\" name=\"btn\" value=\"Εγγραφή\"> <br>\n";
+         "<div class=\"form-group\">
+         	<div class=\"col-lg-2 col-lg-offset-2\">
+	         <input class=\"btn btn-primary\" type=\"submit\" name=\"btn\" value=\"Εγγραφή\"> <br>\n
+	      	<div>
+         </div>";   
       } 
-  $homepage->content=$homepage->content.   
-   "<font color=\"red\">".$error_message."</font>\n"; 
+  $homepage->content .= "</fieldset></form></div></div></div></div></div>";   
    
-   
-   
-   
-	$homepage->Display();
+  $homepage->Display();
 ?>

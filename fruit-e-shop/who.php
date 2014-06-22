@@ -6,19 +6,24 @@
  
  
  
-  $homepage->DisplayRandomItems = "True";
+  //$homepage->DisplayRandomItems = "True";
   
   $homepage->content =
     " 
         <br>\n
-          <div class=\"well\" >\n
+          <div class=\"container\" >\n
+          <div class=\"row\">
+          <div class=\"col-lg-12\">
+            <div class=\"bs-component\">
+              <blockquote>
              <dl>\n
                <dt> Αλεξανδράκης Αλέξανδρος </dt>\n
                   <dd> Υπεύθυνος προμηθειών </dd>\n
           	   <dt> Μπαλκουρανίδου Αγγελική </dt>\n
 		  			      <dd> Υπεύθυνη πωλήσεων </dd>\n
 	  		     </dl>\n
-          </div>"; 
+	  		   </blockquote>  
+          </div></div></div></div>"; 
   
 	$homepage->Display();
   

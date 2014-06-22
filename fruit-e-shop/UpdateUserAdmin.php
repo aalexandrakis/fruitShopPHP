@@ -76,36 +76,62 @@
   
 
   $homepage->content =            
-  "
-     <form  method=\"post\"> 
-  
-     <Table>
-       <tr>
-         <td> Ονοματεπώνυμο </td>
-         <td> <input type=\"text\" name=\"name\" value='".$name."' size=\"50\" maxlength\"50\" readonly></td>
-       </tr>
-       <tr>
-         <td> Διεύθυνση </td>
-         <td> <input type=\"text\" name=\"address\" value='".$address."' size=\"50\" maxlength\"100\" readonly></td>
-       </tr>
-       <tr>
-         <td> Πόλη/Περιοχή </td>
-         <td> <input type=\"text\" name=\"city\" value='".$city."' size=\"50\" maxlength\"50\" readonly></td>
-       </tr>
-       <tr>
-         <td> Τηλέφωνο </td>
-         <td> <input type=\"text\" name=\"phone\" value='".$phone."' size=\"10\" maxlength\"10\" readonly></td>
-       </tr>
-       <tr>
-         <td> E-mail </td>
-         <td> <input type=\"text\" name=\"email\" value='".$email."' size=\"50\" maxlength\"50\" readonly></td>
-       </tr>
-       <tr>
-         <td> Διαχειριστής Συστήματος </td>
-         <td> <input type=\"checkbox\" name=\"isadmin\" value=".$isadmin." ".$homepage->ischecked($isadmin, 1)."/>\n 
-       </table>
-     <input type=\"submit\" name=\"updateUser\" value=\"Διόρθωση\"> <br>
-     <font color=\"red\">".$error_message."</font>"; }
+  "  <div class=\"container\">
+   <div class=\"bs-docs-section\">
+  		<div class=\"row\">
+  		<div class=\"col-lg-8\">
+  		 <div class=\"well bs-component\">";
+  		 if (isset($error_message) && $error_message != ""){
+  		 	$homepage -> content .=
+  		 	"<div class=\"alert alert-dismissable alert-danger\">".$error_message."</div>";
+  		 }
+  		 
+  		 $homepage -> content .=
+  		 "<form class =\"form-horizontal\"  method=\"post\">
+  		 <fieldset>
+  		 <div class=\"form-group\">
+                   	<label for=\"name\" class=\"col-lg-2 control-label\">Όνομα</label>
+                   	<div class=\"col-lg-10\">
+                   		<input class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Όνομα\" type=\"text\" value='".$name."' readonly>
+                   	</div>
+               	</div>
+       			<div class=\"form-group\">
+                    	<label for=\"address\" class=\"col-lg-2 control-label\">Διεύθυνση</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"address\" name=\"address\" placeholder=\"Διεύθυνση\" type=\"text\" value='".$address."' readonly>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"city\" class=\"col-lg-2 control-label\">Πόλη</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"city\"  name=\"city\" placeholder=\"Πόλη\" type=\"text\" value='".$city."' readonly>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"phone\" class=\"col-lg-2 control-label\">Τηλέφωνο</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"phone\" name=\"phone\" placeholder=\"Τηλέφωνο\" type=\"text\" value='".$phone."' readonly>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"email\" class=\"col-lg-2 control-label\">E-mail</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"E-mail\" type=\"text\" value='".$email."' readonly>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                  	<div class=\"col-lg-10\">
+	                  	<div class=\"checkbox\">
+	                        <label>
+	                          <input type=\"checkbox\" name=\"isadmin\" value=".$isadmin." ".$homepage->ischecked($isadmin, 1)."/> Διαχειριστής Συστήματος
+	                        </label>
+	                     </div>
+                     </div>
+                     </div>
+     <input type=\"submit\" class=\"btn btn-warning\" name=\"updateUser\" value=\"Διόρθωση\"> <br>
+     </fieldset>
+     </form></div></div></div></div></div>"; 
+  }
    
    
 	$homepage->Display();

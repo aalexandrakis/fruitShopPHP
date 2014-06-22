@@ -32,24 +32,32 @@
      $homepage->content = 
       "
        <form method=\"POST\">
-       <br>\n
-       <h3>".$header."</h3>
-       <br>\n                 
-       <table border=1px bordercolor=\"black\">
-        <tr>
-           <td class=\"headers\"> Κωδικός </td>
-           <td class=\"headers\"> Ημερομηνία </td>
-           <td class=\"headers\"> Ποσό  </td>
-	   <td class=\"headers\"> Κατάσταση  </td>";
-           if (isset($_SESSION['admin'])){
-              $homepage->content = $homepage->content.
-              "<td class=\"headers\"> Χρήστης  </td>
-	       <td class=\"headers\"> Paypal  </td>";
-           }
-           //$homepage->content = $homepage->content.
-           //  "<td class=\"headers\"> Κατάσταση  </td>";
-           
-        $homepage->content = $homepage->content."</tr>";
+        <div class=\"container\">
+       <div class=\"bs-docs-section\">
+        <div class=\"row\">
+          <div class=\"col-lg-12\">
+            <div class=\"page-header\">
+              <h1 id=\"tables\">Οι παραγγελίες μου</h1>
+            </div>
+
+            <div class=\"bs-component\">
+              <table class=\"table table-striped table-hover\">
+                <thead>
+                  <tr>
+                    <th>Κωδικός</th>
+                    <th>Ημερομηνία</th>
+                    <th>Ποσό</th>
+                    <th>Κατάσταση</th>";
+				     if (isset($_SESSION['admin'])){
+				     	$homepage->content = $homepage->content.
+				     	"<th> Χρήστης  </th>
+				     	<th> Κωδικός Paypal  </th>";
+				     }
+				     $homepage->content .= 
+                  "</tr>
+                </thead>
+                <tbody>"; 
+      $homepage->content = $homepage->content."</tr>";
       while ($row=$result->fetch_assoc()){
           $homepage->content = $homepage->content.
           "<tr>
@@ -64,10 +72,7 @@
 		 <td>".$row['txn_id']."</td>";
 
              }
-             //  $homepage->content = $homepage->content.
-             //   "<td>".$homepage->Order_Status[$row['status']]."</td>";
-             
-          $homepage->content = $homepage->content."</tr>";
+          $homepage->content = $homepage->content."</tr></tbody>";
       }
       
        

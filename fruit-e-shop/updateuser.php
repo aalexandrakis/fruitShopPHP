@@ -27,7 +27,6 @@
   }
   }
   $error_message = "";
-  
   if (isset($_POST['name'])) {
       $name = $_POST['name'];
       $address = $_POST['address'];
@@ -49,7 +48,7 @@
   else if ((isset($_POST['email'])) && ($_POST['email'] == "")) {
        $error_message = "Δεν εχεις συμπληρώσει E-mail "; }
   else if ((isset($_POST['password'])) && ($_POST['password'] == "")) {
-       $error_message = "Δεν εχεις συμπληρώσει Κωδικό "; }
+  	   $error_message = "Δεν εχεις συμπληρώσει Κωδικό "; }
   else if ((isset($_POST['confpass'])) && ($_POST['confpass'] == "")) {
        $error_message = "Δεν εχεις συμπληρώσει Επιβεβαίωση κωδικού "; }
 
@@ -85,41 +84,69 @@
   
 
   $homepage->content =            
-  "
-     <form action=\"updateuser.php\" method=\"post\"> 
-  
-     <Table>
-       <tr>
-         <td> Ονοματεπώνυμο </td>
-         <td> <input type=\"text\" name=\"name\" value='".$name."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Διεύθυνση </td>
-         <td> <input type=\"text\" name=\"address\" value='".$address."' size=\"50\" maxlength\"100\"></td>
-       </tr>
-       <tr>
-         <td> Πόλη/Περιοχή </td>
-         <td> <input type=\"text\" name=\"city\" value='".$city."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Τηλέφωνο </td>
-         <td> <input type=\"text\" name=\"phone\" value='".$phone."' size=\"10\" maxlength\"10\"></td>
-       </tr>
-       <tr>
-         <td> E-mail </td>
-         <td> <input type=\"text\" name=\"email\" value='".$email."' size=\"50\" maxlength\"50\"></td>
-       </tr>
-       <tr>
-         <td> Κωδικός χρήστη </td>
-         <td> <input type=\"password\" name=\"password\" value='".$password."' size=\"20\" maxlength\"20\"></td>
-       </tr>                                             
-       <tr>
-         <td> Επιβεβαίωση κωδικού χρήστη </td>
-         <td> <input type=\"password\" name=\"confpass\" value='".$confpass."' size=\"20\" maxlength\"20\"></td>
-       </tr>
-     </table>
-     <input type=\"submit\" value=\"Διόρθωση\"> <br>
-     <font color=\"red\">".$error_message."</font>"; }
+  "<div class=\"container\">
+   <div class=\"bs-docs-section\">
+  		<div class=\"row\">
+  		<div class=\"col-lg-8\">
+  		 <div class=\"well bs-component\">
+  		 <form class =\"form-horizontal\" action=\"updateuser.php\" method=\"post\">";
+  		  if (isset($error_message) && $error_message != ""){
+  		  	$homepage -> content .=
+              "<div class=\"alert alert-dismissable alert-danger\">".$error_message."</div>";
+  		  }
+          	$homepage -> content .=
+            "<fieldset>
+     			<div class=\"form-group\">
+                   	<label for=\"name\" class=\"col-lg-2 control-label\">Όνομα</label>
+                   	<div class=\"col-lg-10\">
+                   		<input class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Όνομα\" type=\"text\" value='".$name."'>
+                   	</div>
+               	</div>
+       			<div class=\"form-group\">
+                    	<label for=\"address\" class=\"col-lg-2 control-label\">Διεύθυνση</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"address\" name=\"address\" placeholder=\"Διεύθυνση\" type=\"text\" value='".$address."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"city\" class=\"col-lg-2 control-label\">Πόλη</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"city\"  name=\"city\" placeholder=\"Πόλη\" type=\"text\" value='".$city."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"phone\" class=\"col-lg-2 control-label\">Τηλέφωνο</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"phone\" name=\"phone\" placeholder=\"Τηλέφωνο\" type=\"text\" value='".$phone."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"email\" class=\"col-lg-2 control-label\">E-mail</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"E-mail\" type=\"text\" value='".$email."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"password\" class=\"col-lg-2 control-label\">Κωδικός</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Κωδικός\" type=\"password\" value='".$password."'>
+                    	</div>
+                  	</div>
+                  	<div class=\"form-group\">
+                    	<label for=\"confpass\" class=\"col-lg-2 control-label\">Επιβεβαίωση κωδικού</label>
+                    	<div class=\"col-lg-10\">
+                      		<input class=\"form-control\" id=\"confpass\" name=\"confpass\" type=\"password\" placeholder=\"Επιβεβαίωση κωδικού\"  value='".$confpass."'>
+                      	</div>	
+                    </div>
+                   <div class=\"form-group\">
+                      <div class=\"col-lg-10 col-lg-offset-2\">
+			     		<input class=\"btn btn-primary\" type=\"submit\" value=\"Διόρθωση\"> <br>
+			     	 </div>
+			      </div>
+			   </fieldset>
+          		</form></div></div></div></div></div>";
+  		}   	
+     
    
    
 	$homepage->Display();

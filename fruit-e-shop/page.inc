@@ -67,7 +67,7 @@ Class Page
     <link href=\"../bootstrap-3.1.1-dist/css/bootswatch.min.css\" rel=\"stylesheet\">";
     
   $this->DisplayTitle();
-  $this->DisplayStyles();
+//   $this->DisplayStyles();
   //echo "</head>\n";
   if ($this->SetBodyOnKeyPress=="") {
      echo "</head>\n<body role = \"document\">\n";
@@ -75,7 +75,7 @@ Class Page
      echo "</head>\n<body role = \"document\" onKeyPress=\"".$this->SetBodyOnKeyPress."\">\n";
      echo "<div class=\"container\" role=\"main\">";
   }
-  //$this->DisplayHeader();
+  $this->DisplayHeader();
   $this->DisplayMenu($this->buttons);
   $this->DisplayLoginSection();
 //   $this->DisplaySummary();
@@ -201,8 +201,8 @@ dt {
  public function DisplayHeader()
  {
 ?>
-  <h1> Fruit Shop Alexandrakis </h1>
-  <h2> Μπακάλικο </h2>
+  <!-- <h1> Fruit Shop Alexandrakis </h1>
+  <h2> Μπακάλικο </h2> -->
   <a href="downloadapk.php">  Click here to download android application Fruit-e-shop  </a>
   <br>
 <?php
@@ -289,8 +289,8 @@ dt {
      if (isset($_POST['logouthidden'])){
         unset($_SESSION['valid_user']);
         unset($_SESSION['admin']);
-// 	    header('Location: http://www.aalexandrakis.freevar.com/fruit-e-shop');
-        header('Location: index.php');
+	    header('Location: http://www.aalexandrakis.freevar.com/fruit-e-shop');
+//         header('Location: index.php');
      }
  } 
 
@@ -588,7 +588,7 @@ dt {
  public function BuiltComboMM($mm1)
  {
     $combo = "";
-       $combo = "<select name=\"mm\" > \n
+       $combo = "<select class=\"form-control\" name=\"mm\" > \n
                    <option name=\"tm\" value=\"Τεμάχιο\" ".$this->isselected("Τεμάχιο", $mm1)."> Τεμάχιο </option>\n
                    <option name=\"kg\" value=\"Κιλό\" ".$this->isselected("Κιλό", $mm1)."> Κιλό </option>  \n
                  </select>\n";
@@ -608,7 +608,7 @@ dt {
     if (!$result){
         die("Δεν μπορεί να γίνει σύνδεση στη βάση δεδομένων.");
     }
-    $combo = "<select name=\"categoryid\"> \n";
+    $combo = "<select class=\"form-control\" name=\"categoryid\"> \n";
     while ($row = $result->fetch_assoc()){
         $combo = $combo.
          "<option name=\"Cat".$row['categoryid']."\" value=\"".$row['categoryid']."\" ".
@@ -629,7 +629,7 @@ public function BuiltComboPhotos($photo)
   $Dir_Photos =  glob($Directory."{*.*}", GLOB_BRACE);
   $ImageCount=0;   
   $combo = "";
-  $combo = "<select name=\"photo\"> \n";
+  $combo = "<select class=\"form-control\" name=\"photo\"> \n";
   $combo = $combo.
    "<option name=\"none\" value='' ".
                $this->isselected("", $photo)."> "."  "." </option>\n";
