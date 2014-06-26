@@ -103,7 +103,7 @@
        while ($row_item = mysqli_fetch_assoc($result_items)){
                $counter=0;
                ++$filledrows;
-               $homepage->content .="<div class=\"col-xs-3\" style='height:40%;'>\n";
+               $homepage->content .="<div class=\"col-xs-2\" style='height:40%;'>\n";
                $homepage->content .= "<img src='".$homepage->path."/productimg/".$row_item['photo']."' alt='Item Photo' style=\"width: 200px; height: 200px;\" data-src=\"holder.js/200x200\" class=\"img-thumbnail\" alt=\"200x200\">";
                $homepage->content .="<a href='".$linkitemto.$row_item['itemid']."'>".$row_item['itemid']."-".$row_item['descr']."</a>" ;
                $homepage->content .="<br>".$row_item['price']." &euro;";
