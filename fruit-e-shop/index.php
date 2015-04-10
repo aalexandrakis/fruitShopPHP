@@ -4,7 +4,7 @@
   include ('page.inc');
   $homepage=new Page();
   $homepage->Set_Path();
-  
+
   if (isset($_SESSION['admin'])){
       $linkitemto="item.php?itemid=";
       $homepage->content = "<a href='item.php'>Εισαγωγή νέου είδους</a>";
