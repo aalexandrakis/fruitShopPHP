@@ -4,7 +4,7 @@ Class Page
 {
   
  public $content;
- public $title="Fruit Shop Alexandrakis";
+ public $title="Fruit Shop Alexandrakis ";
  public $buttons = array ();
  public $dbname = "";
  public $hostname = "";
